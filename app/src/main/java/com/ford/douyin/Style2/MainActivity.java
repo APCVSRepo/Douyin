@@ -1,23 +1,27 @@
 package com.ford.douyin.Style2;
 
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.ford.douyin.R;
-import com.ford.douyin.CardAdapter;
-
 import java.util.LinkedList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 
 public class MainActivity extends AppCompatActivity
 {
+    private ImageView mMainImageView;
     private RecyclerView mVideoWallView;
+    private Animation mAniFadeIn;
     private static final List<Integer> mList;
     static
     {
@@ -48,8 +52,33 @@ public class MainActivity extends AppCompatActivity
         mList.add(R.drawable.img24);
         mList.add(R.drawable.img25);
         mList.add(R.drawable.img26);
-
     }
+
+    private RecyclerView.OnScrollListener mScrollListener = new RecyclerView.OnScrollListener()
+    {
+
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState)
+        {
+            super.onScrollStateChanged(recyclerView, newState);
+
+            if (newState == RecyclerView.SCROLL_STATE_IDLE)
+            {
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                if (layoutManager instanceof LinearLayoutManager)
+                {
+                    LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+
+                    int pos = linearManager.findFirstCompletelyVisibleItemPosition();
+                    mMainImageView.setImageResource(((CardAdapter)recyclerView.getAdapter()).getItemImageID(pos - 1));
+                    mMainImageView.startAnimation(mAniFadeIn);
+//                    Toast.makeText(MainActivity.this, "" + pos, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +86,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.style2_activity_main);
         mVideoWallView = findViewById(R.id.video_wall);
+        mMainImageView = findViewById(R.id.main_image_view);
+        mAniFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
         hideBar();
 
@@ -69,6 +100,7 @@ public class MainActivity extends AppCompatActivity
         // 设置adapter
         final CardAdapter adapter = new CardAdapter(mList);
         mVideoWallView.setAdapter(adapter);
+        mVideoWallView.addOnScrollListener(mScrollListener);
     }
 
 

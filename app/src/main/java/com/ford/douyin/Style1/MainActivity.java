@@ -3,7 +3,6 @@ package com.ford.douyin.Style1;
 
 import android.os.Bundle;
 
-import com.ford.douyin.CardAdapter;
 import com.ford.douyin.R;
 
 import java.util.LinkedList;

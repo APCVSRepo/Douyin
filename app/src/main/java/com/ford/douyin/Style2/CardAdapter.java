@@ -1,6 +1,5 @@
-package com.ford.douyin;
+package com.ford.douyin.Style2;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -8,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.ford.douyin.R;
 
 import java.util.List;
 
@@ -34,10 +35,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>
         @Override
         public void onClick(View view)
         {
-//            Toast.makeText(view.getContext(), "No." + mImageView.getTag().toString(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(view.getContext(), VideoActivity.class);
-            intent.putExtra(VideoActivity.EXTRA_RES_ID, mResID);
-            view.getContext().startActivity(intent);
+//            Intent intent = new Intent(view.getContext(), VideoActivity.class);
+//            intent.putExtra(VideoActivity.EXTRA_RES_ID, mResID);
+//            view.getContext().startActivity(intent);
         }
     }
 
@@ -51,7 +51,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
     {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.view_card_item, viewGroup, false);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.style2_view_card_item, viewGroup, false);
         return new ViewHolder(itemView);
     }
 
@@ -83,11 +83,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>
                 }
             }
         }.execute();
-
-
-
-
-
     }
 
 
@@ -95,5 +90,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>
     public int getItemCount()
     {
         return Integer.MAX_VALUE;
+    }
+
+    public int getItemImageID(int i)
+    {
+        int pos = i % mList.size();
+        if (pos >= 0)
+            return mList.get(pos);
+        else
+            return mList.get(0);
     }
 }
