@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="100dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/gps"
+            android:scaleType="fitCenter"/>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上海"
+            android:textColor="@color/color_active_text"
+            android:textSize="22sp"/>
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="玩转车机"
+            android:textColor="@color/color_inactive_text"
+            android:textSize="22sp"/>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/video_wall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="20dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</FrameLayout>
